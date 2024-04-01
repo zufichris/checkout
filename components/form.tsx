@@ -11,13 +11,13 @@ const Form = () => {
 
   const [current, setcurrent] = useState(data);
   const [disabled, setdisabled] = useState(true);
-  const [clear, setclear] = useState(false);
   const [name, setname] = useState(false);
   const [email, setemail] = useState(false);
   const [address, setaddress] = useState(false);
   const [procx, setprocx] = useState(false);
   const [qual, setqual] = useState(false);
   const [load, setload] = useState(false);
+
   const handleChange = (value: string) => {
     switch (current.step) {
       case 1:
@@ -72,12 +72,12 @@ const Form = () => {
         setload(true);
         setTimeout(() => {
           setcurrent({
-            placeholder: "We Checking",
+            placeholder: "We Are Checking Product Quality",
             step: 5,
             type: "process",
             value: "",
           });
-        }, 3000);
+        }, 4000);
         break;
       case 5:
         break;
@@ -86,19 +86,19 @@ const Form = () => {
     }
   };
   return (
-    <div className="fixed flex flex-col gap-4 items-center justify-center   z-50 h-screen w-screen bg-transparent">
-      <ul className="steps">
+    <div className="fixed sm:text-sm flex  flex-col mt-6 gap-4 items-center justify-center   z-50 h-screen w-screen bg-transparent">
+      <ul className="steps overflow-hidden">
         <li
           data-content={name ? "✓" : "?"}
-          className={`step  ${name ? "step-success" : "step-neutral"}`}
+          className={`step sm:text-sm  ${name ? "step-success" : "step-neutral"}`}
         >
-          Full Name
+        Name
         </li>
         <li
           data-content={email ? "✓" : "?"}
           className={`step  ${email ? "step-success" : "step-neutral"}`}
         >
-          Email Verification
+        Email
         </li>
 
         <li
@@ -107,16 +107,20 @@ const Form = () => {
         >
           Address
         </li>
-        <li data-content="★" className="step step-neutral">
+        <li data-content={procx ? "✓" : "?"}
+          className={`step  ${procx ? "step-success" : "step-neutral"}`}>
           Processing Order
         </li>
-        <li data-content="" className="step step-neutral">
+        <li data-content={qual ? "✓" : "?"}
+          className={`step  ${qual ? "step-success" : "step-neutral"}`}>
           Quality Check
         </li>
-        <li data-content="●" className="step step-neutral">
+        <li  data-content={ "?"}
+          className={`step  ${Number(email)===Math.random() ? "step-success" : "step-neutral"}`}>
           Dispatch Item
         </li>
-        <li data-content="●" className="step step-neutral">
+        <li data-content={  "?"}
+          className={`step  ${Number(email)===Math.random()? "step-success" : "step-neutral"}`}>
           Product Delivered
         </li>
       </ul>
@@ -134,12 +138,12 @@ const Form = () => {
             }}
             type={current?.type}
             placeholder={current?.placeholder}
-            className={`input focus:bg-transparent ${load ? "hidden" : ""}`}
+            className={`input border-neutral-700 focus:bg-transparent ${load ? "hidden" : ""}`}
             value={current.value}
           />
           <button
             onClick={() => next(current.value)}
-            className={`btn bg-transparent border-2 disabled:bg-red-600 ${
+            className={`btn disabled:bg-transparent border-neutral-700 border-2  ${
               load ? "hidden" : ""
             }`}
             disabled={disabled}
@@ -153,7 +157,7 @@ const Form = () => {
         <>
           <h6 className="font-bold sm:text-2xl">{current?.placeholder}</h6>
           <p className="text-neutral-300">Please Wait...</p>
-          <ClipLoader loading={load} color="white" />
+          <ClipLoader size={50} loading={load} color="white" />
         </>
       )}
     </div>
