@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 const Form = () => {
@@ -8,8 +9,9 @@ const Form = () => {
     type: "text",
     placeholder: "Enter Your Full Name",
   };
+const date=new Date()
 
-  const [current, setcurrent] = useState(data);
+const [current, setcurrent] = useState(data);
   const [disabled, setdisabled] = useState(true);
   const [name, setname] = useState(false);
   const [email, setemail] = useState(false);
@@ -68,6 +70,7 @@ const Form = () => {
           type: "process",
           value: "",
         });
+        setprocx(true)
       case 4:
         setload(true);
         setTimeout(() => {
@@ -78,6 +81,7 @@ const Form = () => {
             value: "",
           });
         }, 4000);
+        setqual(true)
         break;
       case 5:
         break;
@@ -86,8 +90,8 @@ const Form = () => {
     }
   };
   return (
-    <div className="fixed sm:text-sm flex  flex-col mt-6 gap-4 items-center justify-center   z-50 h-screen w-screen bg-transparent">
-      <ul className="steps overflow-hidden">
+    <div className="fixed sm:text-sm flex  flex-col  gap-4 items-center justify-center   z-50 h-screen w-screen bg-transparent">
+      <ul className="steps overflow-hidden mt-6">
         <li
           data-content={name ? "✓" : "?"}
           className={`step sm:text-sm  ${name ? "step-success" : "step-neutral"}`}
@@ -160,6 +164,11 @@ const Form = () => {
           <ClipLoader size={50} loading={load} color="white" />
         </>
       )}
+      
+      <footer className="flex flex-col items-center justify-center gap-2">
+        <div>copyright {date.getFullYear()} Pet Delivery </div>
+        <div>Developed by <Link href={'https://zufi-techm.github.io/portfolio'} className="font-bold text-primary">IQtech</Link></div>
+         </footer>
     </div>
   );
 };
